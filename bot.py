@@ -242,7 +242,7 @@ async def on_member_remove(member):
 @bot.event
 async def on_member_update(before, after):
     channel = bot.get_channel(1554704852272291900)
-0    if not channel:
+    if not channel:
         return
 
     # Cambio de Apodo
