@@ -4,6 +4,9 @@ import discord
 from discord.ext import commands
 from discord import app_commands
 from http.server import HTTPServer, BaseHTTPRequestHandler
+from dotenv import load_dotenv
+load_dotenv()
+
 
 class SimpleHandler(BaseHTTPRequestHandler):
     def do_GET(self):
