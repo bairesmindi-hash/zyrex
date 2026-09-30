@@ -302,6 +302,56 @@ async def on_member_unban(guild, user):
         await channel.send(embed=embed)
 
 
+# ==========================================
+# SISTEMA DE LOGS - BLOQUE 2: MENSAJES
+# ==========================================
 
+# 1. Mensaje Eliminado
+@bot.event
+async def on_message_delete(message):
+    # Ignorar mensajes de bots para no saturar el canal de logs
+    if message.author.bot:
+        return
+
+    channel = bot.get_channel(1554704852272291900)
+    if channel:
+        embed = discord.Embed(
+            title="🗑️ Mensaje Eliminado",
+            description=f"**Canal:** {message.channel.mention}\n**Autor:** {message.author.mention}",
+            color=discord.Color.orange()
+        )
+        # Si el mensaje tenía texto, lo mostramos
+        if message.content:
+            # Cortamos el texto si es muy largo para que no rompa el embed
+            content = message.content[:1024]
+            embed.add_field(name="Contenido", value=content, inline=False)
+            
+        embed.set_footer(text=f"ID de Usuario: {message.author.id}")
+        await channel.send(embed=embed)
+
+# 2. Mensaje Editado
+@bot.event
+async def on_message_edit(before, after):
+    # Ignorar bots y mensajes cuyo contenido no haya cambiado (ej: embeds que cargan tarde)
+    if before.author.bot or before.content == after.content:
+        return
+
+    channel = bot.get_channel(1554704852272291900)
+    if channel:
+        embed = discord.Embed(
+            title="✏️ Mensaje Editado",
+            description=f"**Canal:** {before.channel.mention}\n**Autor:** {before.author.mention} [Ir al mensaje]({after.jump_url})",
+            color=discord.Color.gold()
+        )
+        
+        # Limitar la longitud por si el mensaje es muy largo
+        old_content = before.content[:1024] if before.content else "*Sin texto (posible embed o imagen)*"
+        new_content = after.content[:1024] if after.content else "*Sin texto (posible embed o imagen)*"
+
+        embed.add_field(name="Antes", value=old_content, inline=False)
+        embed.add_field(name="Después", value=new_content, inline=False)
+        embed.set_footer(text=f"ID de Usuario: {before.author.id}")
+        
+        await channel.send(embed=embed)
 
 bot.run(os.getenv("DISCORD_TOKEN"))
