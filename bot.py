@@ -210,4 +210,98 @@ async def terminos(interaction: discord.Interaction):
 
 
 
+
+
+
+LOG_CHANNEL_ID = 1554704852272291900  
+
+@bot.event
+async def on_member_join(member):
+    channel = bot.get_channel(1554704852272291900)
+    if channel:
+        embed = discord.Embed(
+            title="📥 Miembro Unido",
+            description=f"{member.mention} (`{member.name}`) ha entrado al servidor.",
+            color=discord.Color.green()
+        )
+        embed.set_thumbnail(url=member.display_avatar.url)
+        await channel.send(embed=embed)
+
+@bot.event
+async def on_member_remove(member):
+    channel = bot.get_channel(1554704852272291900)
+    if channel:
+        embed = discord.Embed(
+            title="📤 Miembro Salió",
+            description=f"**{member.name}** ha abandonado el servidor.",
+            color=discord.Color.red()
+        )
+        embed.set_thumbnail(url=member.display_avatar.url)
+        await channel.send(embed=embed)
+
+@bot.event
+async def on_member_update(before, after):
+    channel = bot.get_channel(1554704852272291900)
+0    if not channel:
+        return
+
+    # Cambio de Apodo
+    if before.nick != after.nick:
+        embed = discord.Embed(
+            title="✏️ Apodo Cambiado",
+            description=f"A **{after.mention}** se le cambió el apodo.",
+            color=discord.Color.blue()
+        )
+        embed.add_field(name="Antes", value=str(before.nick), inline=True)
+        embed.add_field(name="Después", value=str(after.nick), inline=True)
+        await channel.send(embed=embed)
+
+    # Roles
+    if before.roles != after.roles:
+        added_roles = [role for role in after.roles if role not in before.roles]
+        removed_roles = [role for role in before.roles if role not in after.roles]
+        
+        if added_roles:
+            roles_str = ", ".join([role.mention for role in added_roles])
+            embed = discord.Embed(
+                title="🟢 Rol Asignado",
+                description=f"A **{after.mention}** se le dio el rol: {roles_str}",
+                color=discord.Color.green()
+            )
+            await channel.send(embed=embed)
+            
+        if removed_roles:
+            roles_str = ", ".join([role.mention for role in removed_roles])
+            embed = discord.Embed(
+                title="🔴 Rol Removido",
+                description=f"A **{after.mention}** se le quitó el rol: {roles_str}",
+                color=discord.Color.red()
+            )
+            await channel.send(embed=embed)
+
+@bot.event
+async def on_member_ban(guild, user):
+    channel = bot.get_channel(1554704852272291900)
+    if channel:
+        embed = discord.Embed(
+            title="🔨 Miembro Baneado",
+            description=f"**{user.name}** ha sido baneado del servidor.",
+            color=discord.Color.dark_red()
+        )
+        await channel.send(embed=embed)
+
+@bot.event
+async def on_member_unban(guild, user):
+    channel = bot.get_channel(1554704852272291900)
+    if channel:
+        embed = discord.Embed(
+            title="🔓 Miembro Desbaneado",
+            description=f"**{user.name}** ha sido desbaneado.",
+            color=discord.Color.teal()
+        )
+        await channel.send(embed=embed)
+
+
+
+
 bot.run(os.getenv("DISCORD_TOKEN"))
