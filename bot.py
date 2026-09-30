@@ -354,4 +354,5 @@ async def on_message_edit(before, after):
         
         await channel.send(embed=embed)
 
-bot.run(os.getenv("DISCORD_TOKEN"))
+TOKEN = os.getenv("DISCORD_TOKEN")
+bot.run(TOKEN)
