@@ -53,7 +53,7 @@ class VerificacionView(discord.ui.View):
     def __init__(self):
         super().__init__(timeout=None)
 
-    @discord.ui.button(label="Verificarme", style=discord.ButtonStyle.green, emoji="✅", custom_id="verif_zyrex_v4")
+    @discord.ui.button(label="Verificarme", style=discord.ButtonStyle.green, emoji="✅", custom_id="verif_zyrex_v6")
     async def verificar(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.defer(ephemeral=True)
 
@@ -88,7 +88,7 @@ class CheckoutView(discord.ui.View):
         super().__init__(timeout=900)
         self.add_item(discord.ui.Button(label="Abrir Mercado Pago", url=link_pago, emoji="💳"))
         
-        btn_verificar = discord.ui.Button(label="Ya pagué, verificar", style=discord.ButtonStyle.success, emoji="✅", custom_id="pago_ok_v4")
+        btn_verificar = discord.ui.Button(label="Ya pagué, verificar", style=discord.ButtonStyle.success, emoji="✅", custom_id="pago_ok_v6")
         btn_verificar.callback = self.verificar_callback
         self.add_item(btn_verificar)
 
@@ -102,46 +102,46 @@ class PagosView(discord.ui.View):
     def __init__(self):
         super().__init__(timeout=None)
 
-    @discord.ui.button(label="Plan Básico ($15)", style=discord.ButtonStyle.success, emoji="💳", custom_id="plan_basico_v4")
+    @discord.ui.button(label="Plan Básico ($7 USD / ~$9.800 ARS)", style=discord.ButtonStyle.success, emoji="💳", custom_id="plan_basico_v6")
     async def boton_basico(self, interaction: discord.Interaction, button: discord.ui.Button):
-        link = "https://www.mercadopago.com.uy/checkout/v1/payment/redirect/cb8605f8-3f31-4cd6-ab0f-98b087bd6df2/payment-option-form/?source=link&preference-id=3729580379-abb76c02-6aa7-4219-803e-0ac9ad96de86&router-request-id=753f8e8c-c594-480f-b43e-8b8543b26621&p=2f4d26fb8a77a1e4622992ca7d9f7932"
+        link = "https://mpago.la/1GK6xnc"
         embed = discord.Embed(
             title="💳 Pagá con Mercado Pago",
             description="Hacé clic en **Abrir Mercado Pago** para completar tu pago de manera segura.\n\n*En breve te dirán si el pago se hizo con éxito.*",
             color=0x009EE3
         )
         embed.add_field(name="📦 Producto", value="Plan Básico × 1", inline=False)
-        embed.add_field(name="💵 Total", value="$ 600,00 UYU", inline=False)
+        embed.add_field(name="💵 Total", value="$7 USD (~$9.800 ARS)", inline=False)
         embed.add_field(name="⏳ Estado", value="🟡 Esperando tu pago...", inline=False)
         
         view = CheckoutView(link)
         await interaction.response.send_message(embed=embed, view=view, ephemeral=True)
 
-    @discord.ui.button(label="Plan Personalizado ($35)", style=discord.ButtonStyle.primary, emoji="⚡", custom_id="plan_pers_v4")
+    @discord.ui.button(label="Plan Personalizado ($15 USD / ~$21.000 ARS)", style=discord.ButtonStyle.primary, emoji="⚡", custom_id="plan_pers_v6")
     async def boton_personalizado(self, interaction: discord.Interaction, button: discord.ui.Button):
-        link = "https://www.mercadopago.com.uy/checkout/v1/payment/redirect/2c9766a0-6092-49be-b62e-bcb8656b207a/payment-option-form/?source=link&router-request-id=5d0807c4-fb2f-4e1c-ab39-ecfed8d5ef9d&preference-id=3729580379-1e25264e-61b3-4c34-8229-4229557fcf15&p=2f4d26fb8a77a1e4622992ca7d9f7932"
+        link = "https://mpago.la/2Ppt3PU"
         embed = discord.Embed(
             title="💳 Pagá con Mercado Pago",
             description="Hacé clic en **Abrir Mercado Pago** para completar tu pago de manera segura.\n\n*En breve te dirán si el pago se hizo con éxito.*",
             color=0x009EE3
         )
         embed.add_field(name="📦 Producto", value="Plan Personalizado × 1", inline=False)
-        embed.add_field(name="💵 Total", value="$ 1.400,00 UYU", inline=False)
+        embed.add_field(name="💵 Total", value="$15 USD (~$21.000 ARS)", inline=False)
         embed.add_field(name="⏳ Estado", value="🟡 Esperando tu pago...", inline=False)
         
         view = CheckoutView(link)
         await interaction.response.send_message(embed=embed, view=view, ephemeral=True)
 
-    @discord.ui.button(label="Full Custom ($50)", style=discord.ButtonStyle.danger, emoji="👑", custom_id="plan_full_v4")
+    @discord.ui.button(label="Full Custom ($20 USD / ~$28.000 ARS)", style=discord.ButtonStyle.danger, emoji="👑", custom_id="plan_full_v6")
     async def boton_full(self, interaction: discord.Interaction, button: discord.ui.Button):
-        link = "https://www.mercadopago.com.uy/checkout/v1/payment/redirect/cf0a764d-0241-4955-8ca4-e484ec28de13/payment-option-form/?source=link&router-request-id=3dd062a5-d15c-4853-9adb-89c69a8283de&preference-id=3729580379-7ffed38a-a73d-484d-a3f3-84ed2c37d2e2&p=2f4d26fb8a77a1e4622992ca7d9f7932"
+        link = "https://mpago.la/1jjD4Ar"
         embed = discord.Embed(
             title="💳 Pagá con Mercado Pago",
             description="Hacé clic en **Abrir Mercado Pago** para completar tu pago de manera segura.\n\n*En breve te dirán si el pago se hizo con éxito.*",
             color=0x009EE3
         )
         embed.add_field(name="📦 Producto", value="Full Custom × 1", inline=False)
-        embed.add_field(name="💵 Total", value="$ 2.000,00 UYU", inline=False)
+        embed.add_field(name="💵 Total", value="$20 USD (~$28.000 ARS)", inline=False)
         embed.add_field(name="⏳ Estado", value="🟡 Esperando tu pago...", inline=False)
         
         view = CheckoutView(link)
@@ -156,7 +156,7 @@ class TiendaView(discord.ui.View):
         super().__init__(timeout=None)
 
     # 1. BOTÓN TICKET GENERAL
-    @discord.ui.button(label="Ticket", style=discord.ButtonStyle.secondary, emoji="🎫", custom_id="btn_ticket_v4")
+    @discord.ui.button(label="Ticket", style=discord.ButtonStyle.secondary, emoji="🎫", custom_id="btn_ticket_v6")
     async def boton_ticket(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.defer(ephemeral=True, thinking=True)
 
@@ -187,7 +187,7 @@ class TiendaView(discord.ui.View):
         await interaction.followup.send(f"✅ ¡Tu ticket ha sido creado! Dirígete a {ticket_channel.mention}", ephemeral=True)
 
     # 2. BOTÓN SOPORTE
-    @discord.ui.button(label="Soporte", style=discord.ButtonStyle.primary, emoji="🛠️️", custom_id="btn_soporte_v4")
+    @discord.ui.button(label="Soporte", style=discord.ButtonStyle.primary, emoji="🛠", custom_id="btn_soporte_v6")
     async def boton_soporte(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.defer(ephemeral=True, thinking=True)
 
@@ -218,7 +218,7 @@ class TiendaView(discord.ui.View):
         await interaction.followup.send(f"✅ ¡Tu ticket ha sido creado! Dirígete a {ticket_channel.mention}", ephemeral=True)
 
     # 3. BOTÓN COMPRA (ABRE CANAL Y MANDA EL PANEL DE PAGOS ADENTRO)
-    @discord.ui.button(label="Compra", style=discord.ButtonStyle.success, emoji="🛒", custom_id="btn_compra_v4")
+    @discord.ui.button(label="Compra", style=discord.ButtonStyle.success, emoji="🛒", custom_id="btn_compra_v6")
     async def boton_compra(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.defer(ephemeral=True, thinking=True)
 
@@ -243,13 +243,14 @@ class TiendaView(discord.ui.View):
 
         mencion_staff = rol_staff.mention if rol_staff else "@Staff"
         
+        # TEXTO ACTUALIZADO Y DINÁMICO PARA EL TICKET DE COMPRA
         embed_compra = discord.Embed(
             title="💳 Zyrex Store • Panel de Compra",
             description=(
                 "Selecciona el plan que deseas adquirir haciendo clic en su botón correspondiente abajo para pagar con **Mercado Pago**.\n\n"
-                "🔹 **Plan Básico ($15)** — $600 UYU\n"
-                "🔹 **Plan Personalizado ($35)** — $1.400 UYU\n"
-                "🔹 **Full Custom ($50)** — $2.000 UYU"
+                "🔹 **Plan Básico** — $7 USD (~$9.800 ARS)\n"
+                "🔹 **Plan Personalizado** — $15 USD (~$21.000 ARS)\n"
+                "🔹 **Full Custom** — $20 USD (~$28.000 ARS)"
             ),
             color=discord.Color.from_rgb(0, 158, 227)
         )
@@ -263,9 +264,9 @@ class TiendaView(discord.ui.View):
         )
         await interaction.followup.send(f"✅ ¡Tu ticket de compra ha sido creado! Dirígete a {ticket_channel.mention}", ephemeral=True)
 
-@bot.tree.command(name="tienda", description="Envía el panel principal de atención y tienda de Zyrex")
+@bot.tree.command(name="compra", description="Envía el panel principal de atención y tienda de Zyrex")
 @app_commands.checks.has_permissions(administrator=True)
-async def tienda(interaction: discord.Interaction):
+async def compra(interaction: discord.Interaction):
     embed = discord.Embed(
         title="Zyrex • Centro de atención y Tienda",
         description="¿Cómo podemos ayudarte?\nSelecciona la opción que prefieras para abrir tu ticket al instante con nuestro equipo.",
@@ -285,7 +286,7 @@ class TerminosView(discord.ui.View):
     def __init__(self):
         super().__init__(timeout=None)
 
-    @discord.ui.button(label="Español", style=discord.ButtonStyle.primary, emoji="🇪🇸", custom_id="term_es_v4")
+    @discord.ui.button(label="Español", style=discord.ButtonStyle.primary, emoji="🇪🇸", custom_id="term_es_v6")
     async def espanol_callback(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.send_message(
             "🇪🇸 **Términos y Condiciones (Español)**\n"
@@ -294,7 +295,7 @@ class TerminosView(discord.ui.View):
             ephemeral=True
         )
 
-    @discord.ui.button(label="English", style=discord.ButtonStyle.secondary, emoji="🇺🇸", custom_id="term_en_v4")
+    @discord.ui.button(label="English", style=discord.ButtonStyle.secondary, emoji="🇺🇸", custom_id="term_en_v6")
     async def english_callback(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.send_message(
             "🇺🇸 **Terms and Conditions (English)**\n"
