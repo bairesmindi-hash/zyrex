@@ -213,7 +213,7 @@ class TiendaView(discord.ui.View):
         mencion_staff = rol_staff.mention if rol_staff else "@Staff"
         await ticket_channel.send(
             f"¡Hola {member.mention}! {mencion_staff}\n"
-            f"🛠️️ Has abierto un ticket de **Soporte**. Cuéntanos cuál es tu problema detalladamente."
+            f"🛠️ Has abierto un ticket de **Soporte**. Cuéntanos cuál es tu problema detalladamente."
         )
         await interaction.followup.send(f"✅ ¡Tu ticket ha sido creado! Dirígete a {ticket_channel.mention}", ephemeral=True)
 
@@ -266,7 +266,6 @@ class TiendaView(discord.ui.View):
 @bot.tree.command(name="tienda", description="Envía el panel principal de atención y tienda de Zyrex")
 @app_commands.checks.has_permissions(administrator=True)
 async def tienda(interaction: discord.Interaction):
-    await interaction.response.defer(ephemeral=True)
     embed = discord.Embed(
         title="Zyrex • Centro de atención y Tienda",
         description="¿Cómo podemos ayudarte?\nSelecciona la opción que prefieras para abrir tu ticket al instante con nuestro equipo.",
@@ -276,7 +275,8 @@ async def tienda(interaction: discord.Interaction):
     embed.add_field(name="🛠 Soporte", value="Ayuda técnica o de servicios.", inline=True)
     embed.add_field(name="🛒 Compra", value="Ver planes y realizar pagos.", inline=True)
     
-    await interaction.followup.send(embed=embed, view=TiendaView())
+    # Enviamos directamente de forma pública (sin ephemeral)
+    await interaction.response.send_message(embed=embed, view=TiendaView())
 
 
 # ==========================================
@@ -307,7 +307,6 @@ class TerminosView(discord.ui.View):
 @bot.tree.command(name="terminos", description="Muestra el panel de Términos y Condiciones de Zyrex")
 @app_commands.checks.has_permissions(administrator=True)
 async def terminos(interaction: discord.Interaction):
-    await interaction.response.defer(ephemeral=True)
     embed = discord.Embed(
         title="📜 Términos y Condiciones — Zyrex Store",
         description=(
@@ -326,7 +325,7 @@ async def terminos(interaction: discord.Interaction):
     embed.set_footer(text="Zyrex Store | Términos y Condiciones")
     
     view = TerminosView()
-    await interaction.followup.send(embed=embed, view=view)
+    await interaction.response.send_message(embed=embed, view=view)
 
 
 # ==========================================
