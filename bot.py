@@ -104,7 +104,7 @@ class PagosView(discord.ui.View):
 
     @discord.ui.button(label="Plan Básico ($15)", style=discord.ButtonStyle.success, emoji="💳", custom_id="plan_basico_v4")
     async def boton_basico(self, interaction: discord.Interaction, button: discord.ui.Button):
-        link = "https://mpago.la/1mJDEKY"
+        link = "https://www.mercadopago.com.uy/checkout/v1/payment/redirect/cb8605f8-3f31-4cd6-ab0f-98b087bd6df2/payment-option-form/?source=link&preference-id=3729580379-abb76c02-6aa7-4219-803e-0ac9ad96de86&router-request-id=753f8e8c-c594-480f-b43e-8b8543b26621&p=2f4d26fb8a77a1e4622992ca7d9f7932"
         embed = discord.Embed(
             title="💳 Pagá con Mercado Pago",
             description="Hacé clic en **Abrir Mercado Pago** para completar tu pago de manera segura.\n\n*En breve te dirán si el pago se hizo con éxito.*",
@@ -119,7 +119,7 @@ class PagosView(discord.ui.View):
 
     @discord.ui.button(label="Plan Personalizado ($35)", style=discord.ButtonStyle.primary, emoji="⚡", custom_id="plan_pers_v4")
     async def boton_personalizado(self, interaction: discord.Interaction, button: discord.ui.Button):
-        link = "https://mpago.la/13E75Ct"
+        link = "https://www.mercadopago.com.uy/checkout/v1/payment/redirect/2c9766a0-6092-49be-b62e-bcb8656b207a/payment-option-form/?source=link&router-request-id=5d0807c4-fb2f-4e1c-ab39-ecfed8d5ef9d&preference-id=3729580379-1e25264e-61b3-4c34-8229-4229557fcf15&p=2f4d26fb8a77a1e4622992ca7d9f7932"
         embed = discord.Embed(
             title="💳 Pagá con Mercado Pago",
             description="Hacé clic en **Abrir Mercado Pago** para completar tu pago de manera segura.\n\n*En breve te dirán si el pago se hizo con éxito.*",
@@ -134,7 +134,7 @@ class PagosView(discord.ui.View):
 
     @discord.ui.button(label="Full Custom ($50)", style=discord.ButtonStyle.danger, emoji="👑", custom_id="plan_full_v4")
     async def boton_full(self, interaction: discord.Interaction, button: discord.ui.Button):
-        link = "https://mpago.la/1uPnuaK"
+        link = "https://www.mercadopago.com.uy/checkout/v1/payment/redirect/cf0a764d-0241-4955-8ca4-e484ec28de13/payment-option-form/?source=link&router-request-id=3dd062a5-d15c-4853-9adb-89c69a8283de&preference-id=3729580379-7ffed38a-a73d-484d-a3f3-84ed2c37d2e2&p=2f4d26fb8a77a1e4622992ca7d9f7932"
         embed = discord.Embed(
             title="💳 Pagá con Mercado Pago",
             description="Hacé clic en **Abrir Mercado Pago** para completar tu pago de manera segura.\n\n*En breve te dirán si el pago se hizo con éxito.*",
@@ -187,7 +187,7 @@ class TiendaView(discord.ui.View):
         await interaction.followup.send(f"✅ ¡Tu ticket ha sido creado! Dirígete a {ticket_channel.mention}", ephemeral=True)
 
     # 2. BOTÓN SOPORTE
-    @discord.ui.button(label="Soporte", style=discord.ButtonStyle.primary, emoji="🛠️", custom_id="btn_soporte_v4")
+    @discord.ui.button(label="Soporte", style=discord.ButtonStyle.primary, emoji="🛠️️", custom_id="btn_soporte_v4")
     async def boton_soporte(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.defer(ephemeral=True, thinking=True)
 
@@ -275,7 +275,6 @@ async def tienda(interaction: discord.Interaction):
     embed.add_field(name="🛠 Soporte", value="Ayuda técnica o de servicios.", inline=True)
     embed.add_field(name="🛒 Compra", value="Ver planes y realizar pagos.", inline=True)
     
-    # Enviamos directamente de forma pública (sin ephemeral)
     await interaction.response.send_message(embed=embed, view=TiendaView())
 
 
